@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manage Students - DigiCore University</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="images/image.jpg" type="image/jpeg">
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    img{
+        opacity: 0.4;
+        width: 100%;
+        height: 75%;
+    }
+    .crud-container {
+      max-width: 600px;
+      margin: 100px auto;
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .crud-container input {
+      padding: 10px;
+      margin: 8px;
+      width: 80%;
+    }
+
+    .btn {
+      padding: 10px 15px;
+      margin: 5px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #005c99;
+    }
+
+    #output {
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      font-family: monospace;
+      text-align: left;
+    }
+    .background-image{
+        position: absolute;
+    }
+    .main{
+        position: relative;
+        z-index: 1000;
+        margin: 0;
+    }
+  </style>
+</head>
+<body>
+    <div class="background-image">
+        <img src="images/background.jpg">
+    </div>
+    
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="brand-name">
+      <img src="images/logo.jpg" alt="Logo" class="logo" />
+      <div class="brand-text">
+        <span class="uni-name">DigiCore University</span>
+        <span class="tagline">Empowering Future-Ready Learners</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="aboutus.html">ABOUT</a></li>
+        <li><a href="crud.html">MANAGE STUDENTS</a></li>
+        <li><a href="analytics.html">ACADEMIC DASHBOARD</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="main">
+  <!-- CRUD Content -->
+  <div class="crud-container">
+    <h2>Manage Student Records</h2>
+    <input type="text" id="studentName" placeholder="Student Name" />
+    <input type="text" id="studentName" placeholder="Employee id"/>
+    <input type="text" id="studentGrade" placeholder="Grade (%)" /><br />
+
+    <button class="btn" onclick="createStudent()">Create</button>
+    <button class="btn" onclick="readStudents()">Read</button>
+    <button class="btn" onclick="updateStudent()">Update</button>
+    <button class="btn" onclick="deleteStudent()">Delete</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    let students = {};
+
+    function createStudent() {
+      const name = document.getElementById("studentName").value.trim();
+      const grade = document.getElementById("studentGrade").value.trim();
+
+      if (name && grade) {
+        students[name] = grade;
+        alert("Student created successfully.");
+        readStudents();
+      } else {
+        alert("Please enter both name and grade.");
+      }
+    }
+
+    function readStudents() {
+      const outputDiv = document.getElementById("output");
+      outputDiv.textContent = JSON.stringify(students, null, 2);
+    }
+
+    function updateStudent() {
+      const name = document.getElementById("studentName").value.trim();
+      const grade = document.getElementById("studentGrade").value.trim();
+
+      if (students[name]) {
+        students[name] = grade;
+        alert("Student updated successfully.");
+        readStudents();
+      } else {
+        alert("Student not found.");
+      }
+    }
+
+    function deleteStudent() {
+      const name = document.getElementById("studentName").value.trim();
+
+      if (students[name]) {
+        delete students[name];
+        alert("Student deleted successfully.");
+        readStudents();
+      } else {
+        alert("Student not found.");
+      }
+    }
+  </script>
+</div>
+</body>
+</html>

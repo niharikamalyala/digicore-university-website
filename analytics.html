@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academic Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/image.jpg" type="image/jpeg">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #355c7d, #6c5b7b, #c06c84);
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      padding: 15px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      color: #fff;
+    }
+    .dashboard-controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .dashboard-controls select {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+    .summary-tiles {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 20px;
+      color: #fff;
+    }
+    .tile {
+      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      border-radius: 10px;
+      min-width: 120px;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .chart-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+    h2 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Academic Dashboard</h1>
+    <nav>
+        <a href="index.html" class="brand-name">
+          <img src="images/logo.jpg" alt="Logo" class="logo" />
+          <div class="brand-text">
+            <span class="uni-name">DigiCore University</span>
+            <span class="tagline">Empowering Future-Ready Learners</span>
+          </div>
+        </a>
+        <div class="nav-links">
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="aboutus.html">ABOUT</a></li>
+            <li><a href="crud.html">MANAGE STUDENTS</a></li>
+            <li><a href="analytics.html">ACADEMIC DASHBOARD</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+      </nav>
+  </header>
+
+  <div class="dashboard-controls">
+    <label for="yearSelect">Select Year:</label>
+    <select id="yearSelect">
+      <option>2020</option>
+      <option>2021</option>
+      <option>2022</option>
+      <option>2023</option>
+      <option selected>2024</option>
+    </select>
+    <label for="programSelect">Select Program:</label>
+    <select id="programSelect">
+      <option selected>Bachelors</option>
+      <option>Masters</option>
+      <option>PhD</option>
+    </select>
+  </div>
+
+  <div class="summary-tiles">
+    <div class="tile">👨‍🎓 Students<br><strong>1000</strong></div>
+    <div class="tile">👩‍🏫 Teachers<br><strong>200</strong></div>
+    <div class="tile">📘 Subjects<br><strong>20</strong></div>
+    <div class="tile">📈 Ratio<br><strong>5:1</strong></div>
+  </div>
+
+  <div class="dashboard">
+    <div class="chart-card">
+      <canvas id="performanceChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="syllabusChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="admissionChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas id="graduationChart"></canvas>
+    </div>
+    <div class="chart-card" style="grid-column: span 2;">
+      <canvas id="enrollmentChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const dashboardData = {
+      "2024": {
+        "Bachelors": {
+          pass: [80, 92, 78, 85, 88],
+          fail: [20, 8, 22, 15, 12],
+          syllabus: 85,
+          admission: 90,
+          graduation: 70,
+          enrollment: [100, 150, 220, 280, 300]
+        },
+        "Masters": {
+          pass: [90, 95, 88, 92, 91],
+          fail: [10, 5, 12, 8, 9],
+          syllabus: 92,
+          admission: 95,
+          graduation: 88,
+          enrollment: [50, 60, 80, 100, 120]
+        },
+        "PhD": {
+          pass: [95, 97, 93, 94, 96],
+          fail: [5, 3, 7, 6, 4],
+          syllabus: 96,
+          admission: 98,
+          graduation: 90,
+          enrollment: [10, 15, 20, 25, 30]
+        }
+      },
+      "2023": {
+        "Bachelors": {
+          pass: [75, 88, 70, 80, 82],
+          fail: [25, 12, 30, 20, 18],
+          syllabus: 78,
+          admission: 87,
+          graduation: 68,
+          enrollment: [80, 120, 160, 200, 240]
+        },
+        "Masters": {
+          pass: [85, 90, 84, 86, 88],
+          fail: [15, 10, 16, 14, 12],
+          syllabus: 89,
+          admission: 92,
+          graduation: 85,
+          enrollment: [40, 50, 70, 90, 100]
+        },
+        "PhD": {
+          pass: [93, 96, 91, 92, 94],
+          fail: [7, 4, 9, 8, 6],
+          syllabus: 94,
+          admission: 97,
+          graduation: 88,
+          enrollment: [8, 10, 15, 20, 25]
+        }
+      }
+    };
+
+    const subjectLabels = ['Science', 'Phys. Ed', 'Maths', 'English', 'Arts'];
+    let performanceChart, syllabusChart, admissionChart, graduationChart, enrollmentChart;
+
+    function createCharts() {
+      performanceChart = new Chart("performanceChart", {
+        type: 'bar',
+        data: { labels: subjectLabels, datasets: [] },
+        options: {
+          indexAxis: 'y',
+          plugins: {
+            tooltip: { enabled: true },
+            title: { display: true, text: 'Performance by Subject' }
+          }
+        }
+      });
+
+      syllabusChart = new Chart("syllabusChart", { type: 'doughnut', data: {}, options: {} });
+      admissionChart = new Chart("admissionChart", { type: 'doughnut', data: {}, options: {} });
+      graduationChart = new Chart("graduationChart", { type: 'doughnut', data: {}, options: {} });
+
+      enrollmentChart = new Chart("enrollmentChart", {
+        type: 'line',
+        data: { labels: ['2020', '2021', '2022', '2023', '2024'], datasets: [] },
+        options: {
+          plugins: {
+            tooltip: { enabled: true },
+            title: { display: true, text: 'Student Enrollment by Year' }
+          }
+        }
+      });
+    }
+
+    function updateAllCharts(year, program) {
+      const data = dashboardData[year]?.[program];
+      if (!data) return;
+
+      performanceChart.data.datasets = [
+        { label: 'Pass', data: data.pass, backgroundColor: 'green' },
+        { label: 'Fail', data: data.fail, backgroundColor: 'red' }
+      ];
+      performanceChart.update();
+
+      updateDonut(syllabusChart, 'Syllabus', data.syllabus, 'gold');
+      updateDonut(admissionChart, 'Admission', data.admission, 'orange');
+      updateDonut(graduationChart, 'Graduation', data.graduation, 'crimson');
+
+      enrollmentChart.data.datasets = [
+        { label: `${program} Students`, data: data.enrollment, borderColor: 'purple', fill: false }
+      ];
+      enrollmentChart.update();
+    }
+
+    function updateDonut(chart, label, percent, color) {
+      chart.data = {
+        labels: [label],
+        datasets: [{ data: [percent, 100 - percent], backgroundColor: [color, '#ddd'], borderWidth: 0 }]
+      };
+      chart.options = {
+        plugins: {
+          tooltip: { enabled: true },
+          title: { display: true, text: `${label} Rate - ${percent.toFixed(2)}%` },
+          legend: { display: false }
+        }
+      };
+      chart.update();
+    }
+
+    document.getElementById("yearSelect").addEventListener("change", () => {
+      updateAllCharts(
+        document.getElementById("yearSelect").value,
+        document.getElementById("programSelect").value
+      );
+    });
+
+    document.getElementById("programSelect").addEventListener("change", () => {
+      updateAllCharts(
+        document.getElementById("yearSelect").value,
+        document.getElementById("programSelect").value
+      );
+    });
+
+    createCharts();
+    updateAllCharts("2024", "Bachelors");
+  </script>
+</body>
+</html>

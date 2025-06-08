@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - DigiCore University</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="images/image.jpg" type="image/jpeg">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #222;
+      padding: 10px 30px;
+    }
+
+    .brand-name {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .uni-name {
+      font-size: 18px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .tagline {
+      font-size: 12px;
+      color: #ccc;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links ul li {
+      margin-left: 20px;
+    }
+
+    .nav-links ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-links ul li a:hover {
+      color: #00d8ff;
+    }
+
+    .about-section {
+      background: linear-gradient(to right, #3a6186, #89253e);
+      color: white;
+      min-height: 100vh;
+      padding: 100px 20px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: center;
+    }
+
+    .about-container {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 20px auto;
+      display: block;
+      border: 4px solid white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    h1, h3 {
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .tech-list {
+      text-align: left;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .tech-list li {
+      margin-bottom: 5px;
+    }
+
+    .github-link {
+      margin-top: 30px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 10px 25px;
+      margin-top: 10px;
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s ease;
+    }
+
+    .hero-btn:hover {
+      background-color: white;
+      color: #89253e;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <a href="index.html" class="brand-name">
+      <img src="images/logo.jpg" alt="Logo" class="logo" />
+      <div class="brand-text">
+        <span class="uni-name">DigiCore University</span>
+        <span class="tagline">Empowering Future-Ready Learners</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="aboutus.html">ABOUT</a></li>
+        <li><a href="crud.html">MANAGE STUDENTS</a></li>
+        <li><a href="analytics.html">ACADEMIC DASHBOARD</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- About Content -->
+  <section class="about-section">
+    <div class="about-container">
+      <h1>About the Developer</h1>
+      <img src="images/niharika.jpeg" alt="Niharika Malyala" class="profile-pic" />
+
+      <p>
+        Hi, I'm <strong>Niharika Malyala</strong>, a student at the University of South Florida. This website was created as part of a course project to demonstrate my ability to design, develop, and deploy data-driven web applications using front-end web technologies.
+      </p>
+
+      <h3>Project Purpose</h3>
+      <p>The goal of this website is to build an interactive educational platform that simulates real-world web interfaces. It includes data visualization, basic form operations, and structured content presentation.</p>
+      <br>
+
+      <h3>Technologies Used</h3>
+      <ul style="list-style-position: inside; text-align: left; display: inline-block;">
+        <li>HTML for structure</li>
+        <li>CSS for styling</li>
+        <li>JavaScript for interactivity</li>
+        <li>Chart.js for data visualization</li>
+        <li>Visual Studio Code for development</li>
+        <li>GitHub for source code hosting</li>
+      </ul>
+
+      <br><br>
+
+      <p>
+        🔗 View full source code:  
+        <a href="https://github.com/niharikamalyala" target="_blank" class="hero-btn">GitHub Repository</a>
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>
